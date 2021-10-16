@@ -1,0 +1,18 @@
+<h2 class="text-center">Escolha uma opção</h2>
+<div class="options" *ngFor="let option of options">
+    <button class="btn btn-primary btnadd" (click)="opcaoAtendimento(option.id)">
+        {{ option.opcao }}
+    </button>
+    
+</div>
+
+<hr>
+
+<section class="content">
+    <button class="btn btn-primary btOptions" [routerLink]="['/lista-clientes']">Clientes</button>
+    <button class="btn btn-primary btOptions" [routerLink]="['/lista-produto']">Produtos</button>
+    <button class="btn btn-primary btOptions" [routerLink]="['/order-confirmation']">Entregas</button>
+    <button class="btn btn-primary btOptions" [routerLink]="['/order-mesa-confirmation']">Mesas</button>
+    <button class="btn btn-primary btOptions" [routerLink]="['/lista-categoria']">Categorias</button>
+    <button class="btn btn-primary btOptions" [routerLink]="['/lista-pedido-balcao']">Balcão</button>
+  </section>

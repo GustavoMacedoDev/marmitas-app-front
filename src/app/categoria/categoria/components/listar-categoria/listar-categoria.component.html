@@ -1,0 +1,22 @@
+<table class="striped table">
+    <thead>
+        <tr>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let categoria of categorias">
+            <td>{{ categoria.nome }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="jumbotron jumbotron-fluid">
+    <button class="btn btn-primary" [routerLink]="['/cadastra-categoria']">
+        Cadastrar Categoria
+    </button>
+    <button class="btn btn-primary" [routerLink]="['/atendimento']">
+        Voltar
+    </button>
+
+</div>

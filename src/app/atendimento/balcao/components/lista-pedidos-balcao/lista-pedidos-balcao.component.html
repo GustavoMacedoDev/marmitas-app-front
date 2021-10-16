@@ -1,0 +1,33 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Pedido</th>
+            <th>Data</th>
+            <th>Editar</th>
+            <th>Imprimir</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pedido of pedidos">
+            <td>{{ pedido.observacao }}</td>
+            <td>{{ pedido.instante }}</td>
+            <td>
+                <a class="btn btn-info" 
+                >
+                Editar
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-info" 
+                [routerLink]="['/impressao-balcao/'] + pedido?.idPedido ">
+                Ver
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <button class="btn btn-primary" [routerLink]="['/atendimento']">Novo Pedido</button>
+    <button class="btn btn-primary" [routerLink]="['/atendimento']">Voltar</button>
+  </div>

@@ -1,0 +1,9 @@
+.btcat{
+    margin: 10px;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+}

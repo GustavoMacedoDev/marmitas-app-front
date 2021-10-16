@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total de Pedidos</h5>
+          <p class="card-text">{{ totalPedidos }}</p>
+          <a class="btn btn-primary">Ver Mais</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6" *ngFor="let faturamento of faturamentos">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ faturamento?.pagamento }}</h5>
+          <p class="card-text">
+            <tr>
+              <td>{{ faturamento?.valor | currency : 'BRL' : 'symbol' }}</td>
+            </tr>
+          </p>
+          <a class="btn btn-primary" 
+          [routerLink]="['/analitico', + faturamento?.idFormaPagamento]">Ver Mais</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total de Faturamento</h5>
+          <p class="card-text">Valor Total: {{ total | currency : 'BRL' : 'symbol' }}</p>
+          <a class="btn btn-primary">Ver Mais</a>
+        </div>
+      </div>
+    </div>
+  </div>

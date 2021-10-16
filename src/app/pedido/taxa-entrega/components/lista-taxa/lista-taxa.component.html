@@ -1,0 +1,26 @@
+<div class="table">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let taxa of taxas">
+                <td>{{ taxa.descricao }}</td>
+                <td>{{ taxa.valor | currency: 'BRL' : 'symbol' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div>
+    <button [routerLink]="['/cadastra-taxa']" class="btn btn-primary">
+        Cadastrar Taxa
+    </button>
+    <button [routerLink]="['/restaurants']" class="btn btn-primary">
+        Voltar
+    </button>
+</div>

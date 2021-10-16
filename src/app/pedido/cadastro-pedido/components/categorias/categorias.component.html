@@ -1,0 +1,9 @@
+<div>
+    <h2 class="text-center">Escolha uma Categoria</h2>
+    <div class="box">
+        <div class="container" *ngFor="let categoria of categorias">
+            <app-lista-lanches [categoria]="categoria"></app-lista-lanches>
+        </div>
+    </div>
+</div>
+    

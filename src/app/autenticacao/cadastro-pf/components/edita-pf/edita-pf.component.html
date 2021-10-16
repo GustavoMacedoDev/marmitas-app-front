@@ -1,0 +1,105 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Cliente {{ cliente?.nome }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="form" fxLayoutAlign="center" novalidate>
+      <mat-list>
+        <mat-list-item>
+          <mat-form-field>
+            <input matInput placeholder="Logradouro"
+                formControlName="logradouro">
+          </mat-form-field>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-form-field>
+            <input matInput placeholder="Numero"
+                formControlName="numero">
+          </mat-form-field>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-form-field>
+            <input matInput placeholder="Complemento"
+                formControlName="complemento">
+          </mat-form-field>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-form-field>
+            <input matInput placeholder="Bairro"
+                formControlName="bairro">
+          </mat-form-field>
+        </mat-list-item>
+        <mat-list-item fxLayoutAlign="center">
+          <button mat-raised-button color="primary"
+              [disabled]="form.invalid" (click)="cadastrarEnderecoPf()">
+              Cadastrar
+          </button>
+          &nbsp;
+          <a mat-raised-button routerLink="/atendimento">Voltar</a>
+        </mat-list-item>
+      </mat-list>
+    </form>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" 
+      (click)="salvar(); d('Cross click')">
+      Salvar
+    </button>
+  </div>
+</ng-template>
+
+<form (ngSubmit)="salvar()">   
+    <div class="form-group">
+     <br/>
+     <h3 class="text-center">Editar Cliente</h3>
+   
+     <div class="fields">
+       <label><h3>Nome:</h3>
+         <input type="input" name="nome" size="30" value="{{ cliente?.nome }}"  class="form-control"/>
+       </label><br/><br/>
+   
+       <label><h3>Telefone:</h3>
+         <input type="input" name="telefone" size="11" value="{{ cliente?.telefone }}"  class="form-control"/>
+       </label><br/><br/>
+     </div>
+     
+   
+     <button type="submit" class="fields btn btn-primary">Salvar</button>
+     <button [routerLink]="['/lista-clientes']" class="fields btn btn-primary">Voltar</button>
+    </div>
+    
+   </form>
+
+   <hr>
+   <h3>Endereços do Cliente</h3>
+   
+   <table class="table table-sm">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Logradouro</th>
+            <th>Número</th>
+            <th>Complemento</th>
+            <th>Bairro</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let end of cliente?.enderecos">
+            <td>{{ end.idEndereco }}</td>
+            <td>{{ end.logradouro }}</td>
+            <td>{{ end.numero }}</td>
+            <td>{{ end.complemento }}</td>
+            <td>{{ end.bairro }}</td>
+            <td>Edit</td>
+        </tr>
+    </tbody>
+   </table>
+
+   <button class="btn btn-primary" (click)="open(content)">Adicionar Novo Endereço</button>

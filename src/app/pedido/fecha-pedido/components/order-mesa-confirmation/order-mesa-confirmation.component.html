@@ -1,0 +1,35 @@
+<h2 class="text-center">Lista de Mesa Abertas</h2>
+<div>
+  <button class="btn btn-primary" [routerLink]="['/atendimento']">Novo Pedido</button>
+  <button class="btn btn-primary" [routerLink]="['/atendimento']">Voltar</button>
+  <button class="btn btn-primary" [routerLink]="['/lista-mesas']">Mesas</button>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="text-center">Mesa</th>
+      <th class="text-center">Imprimir</th>
+      <th class="text-center">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" *ngFor="let pedAbertos of pedidosAbertos">
+      <td><strong>{{ pedAbertos?.numeroMesa }}</strong></td>
+      <td>
+        <a class="btn btn-info" 
+          [routerLink]="['/lista-pedido-mesa/listar/'] + pedAbertos?.id ">
+          Ver
+        </a>
+      </td>
+      <td class="text-center" *ngIf="pedAbertos?.totalMesa == 0"><strong>Fechada</strong> </td>
+      <td class="text-center aberta" *ngIf="pedAbertos?.totalMesa > 0"><strong>Aberta</strong></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <button class="btn btn-primary" [routerLink]="['/atendimento']">Novo Pedido</button>
+  <button class="btn btn-primary" [routerLink]="['/atendimento']">Voltar</button>
+  <button class="btn btn-primary" [routerLink]="['/lista-mesas']">Mesas</button>
+</div>

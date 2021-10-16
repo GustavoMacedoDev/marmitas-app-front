@@ -1,0 +1,8 @@
+<div class="form-row">
+  <div class="form-group col-md-12">
+    <select class="form-control" formControlName="pagamento">
+      <option [selected]="true" value="">Selecione uma forma de pagamento</option>
+      <option (click)="setValue(option.value)"  *ngFor="let option of options" value="option.value">{{option.label}}</option>
+    </select>
+  </div>
+</div>

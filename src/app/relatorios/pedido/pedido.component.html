@@ -1,0 +1,16 @@
+<table class=" table table-striped">
+    <thead>
+        <th>Nome </th>
+        <th>Valor </th>
+        <th>Categoria </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let produto of produtos">
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.preco }}</td>
+            <td>{{ produto.categoria.nome}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<button (click)="createPdf()">Create PDF</button>

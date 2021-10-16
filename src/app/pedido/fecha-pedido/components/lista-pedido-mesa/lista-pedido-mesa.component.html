@@ -1,0 +1,143 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Mesa {{ pedido?.mesa.numeroMesa }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div *ngIf="pagamentos.length">
+      <h4 class="text-center">Pagamentos</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Valor Pago</th>
+            <th>Forma de Pagamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pagamentos">
+            <td>{{ p.valorPago | currency: 'BRL': 'symbol' }}</td>
+            <td>{{ p.formaPagamento.formaPagamento }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+      <div>
+        <h4>Total em aberto: {{ pedido?.valorEmAberto | currency: 'BRL': 'symbol' }}</h4>
+        <h4>Total da Mesa: {{ pedido?.mesa.totalMesa | currency: 'BRL': 'symbol' }}</h4>
+      </div>
+      
+
+      <div>
+        <form [formGroup]="form" novalidate>
+          <div class="form-group col-sm-12">
+            <select class="form-control" formControlName="fPagamento" [(ngModel)]="formaPagamento">
+              <option [selected]="true" value="">Selecione uma forma de pagamento</option>
+              <option *ngFor="let fPagamento of formaPagamentos"
+              value="{{ fPagamento.id }}">
+              {{ fPagamento.formaPagamento }}
+              </option>
+            </select>
+          </div>
+
+            <div *ngIf="formaPagamento" class="form-group col-sm-12">
+              <label>Valor pago:</label> <br >
+              <input type="number" formControlName="valorPago" [(ngModel)]="valorPagoInput">
+  
+            </div>
+            <div class="troco form-group col-sm-12" *ngIf="formaPagamento === '1'">
+              <label>Troco para:</label> <br >
+              <input type="number" [(ngModel)]="trocoInput" formControlName="troco">
+            </div>
+
+            <div *ngIf="form.valid" class="troco form-group col-sm-12">
+              <label>Valor de Troco</label> <br >
+              <h1>{{trocoInput - valorPagoInput | currency: 'BRL': 'symbol' }} </h1>
+            </div>
+            <div class="form-group col-sm-12">
+              <label>Cliente</label> <br >
+              <select class="form-control" formControlName="cliente">
+                <option *ngFor="let cliente of clientes" 
+                  value="{{ cliente.id }}">
+                    {{ cliente.nome }}
+                </option>
+              </select>
+            </div>
+            
+        </form>
+      </div>
+      
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" 
+      (click)="salvar(); d('Cross click')">
+      Salvar
+    </button>
+  </div>
+</ng-template>
+
+<div class="report" #report *ngIf="pedido">
+<div>
+  <h3>Pedido {{ pedido?.instante | date:'dd/MM/yyyy HH:mm' }}</h3>
+  <h3 class="text-center">Mesa {{ pedido?.mesa.numeroMesa }}</h3> 
+  <div>
+      <h4>Produtos</h4>
+      <div *ngFor="let item of pedido?.itens">
+          <span><strong>{{ item.quantidade }}x Item: {{ item.produto.nome }} Valor: {{ item.preco  | currency: 'BRL': 'symbol'}}</strong></span>
+      </div>
+  </div>
+  
+  <div>
+      <h2>Total: {{ pedido?.mesa.totalMesa | currency: 'BRL': 'symbol' }}</h2>
+  </div>
+  <div *ngIf="pedido?.observacao">
+    <h6>Observação: {{ pedido?.observacao }}</h6>
+  </div>
+
+</div>  
+</div>
+
+
+<div *ngIf="pedido">
+  <button class="btn btn-primary" (click)="imprimir()" >Imprimir</button>
+  <button class="btadd btn btn-primary" (click)="open(content)">Pagamento</button>
+</div>
+
+
+
+<div *ngIf="!pedido">
+  <h3 class="text-center">A mesa está vazia!!</h3>
+  
+</div>
+
+
+<hr>
+<button class="btadd btn btn-primary" [routerLink]="['/order-mesa-confirmation']">Voltar</button>
+<hr>
+<div>
+  <h4 class="text-center">Pagamentos</h4>
+  <div *ngIf="!pagamentos?.length">
+      <h5 class="text-center">Nenhum pagamento ainda.</h5>
+  </div>
+  <table class="table table-striped" *ngIf="pagamentos?.length">
+    <thead>
+      <tr>
+        <th>Valor</th>
+        <th>Forma de Pagamento</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of pagamentos">
+        <td>{{ p.valorPago | currency: 'BRL': 'symbol' }}</td>
+        <td>{{ p.formaPagamento.formaPagamento }}</td>
+        <td>{{ p.instante }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

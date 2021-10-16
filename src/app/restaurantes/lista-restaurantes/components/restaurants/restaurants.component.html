@@ -1,0 +1,23 @@
+<div class="padding">
+  <section class="content">
+    <h3>Selecione um restaurante</h3>
+    <div class="row">
+            <div *ngFor="let restaurant of restaurants" class="col-sm-6 col-xs-12">
+                <app-restaurant [restaurant]="restaurant"></app-restaurant>
+            </div>
+            <div *ngIf="restaurants?.length === 0" class="col-xs-12">
+              <p class="lead text-center">
+                Não foram encontrados itens para a sua busca.
+              </p>
+            </div>
+      </div>
+
+  </section>
+  <section class="content">
+    <button class="btn btn-primary" [routerLink]="['/lista-clientes']">Clientes</button>
+    <button class="btn btn-primary" [routerLink]="['/lista-produto']">Produtos</button>
+    <button class="btn btn-primary" [routerLink]="['/order-confirmation']">Entregas</button>
+    <button class="btn btn-primary" [routerLink]="['/order-mesa-confirmation']">Mesas</button>
+    <button class="btn btn-primary" [routerLink]="['/lista-taxa']">Taxas</button>
+  </section>
+</div>

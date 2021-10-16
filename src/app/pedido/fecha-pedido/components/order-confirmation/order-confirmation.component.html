@@ -1,0 +1,101 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Pedido </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div *ngIf="pagamentos">
+      <h4 class="text-center">Pagamentos</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Valor</th>
+            <th>Forma de Pagamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pagamentos">
+            <td>{{ p.valorPago | currency: 'BRL': 'symbol' }}</td>
+            <td>{{ p.formaPagamento.formaPagamento }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+      <div>
+        <h4>Total da Entrega: </h4>
+      </div>
+      
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" 
+      (click)="d('Cross click')">
+      Fechar
+    </button>
+  </div>
+</ng-template>
+
+<h2 class="text-center">Lista de Entregas em Aberto</h2>
+<div style="overflow-x:auto;">
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Cliente</th>
+      <th>Data </th>
+      <th>Imprimir</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pedido of pedidosAbertos">
+      <td>{{ pedido?.idPedido }}</td>
+      <td>{{ pedido?.cliente.nome }}</td>
+      <td>{{ pedido?.instante }}</td>
+      <td>
+        <a class="btn btn-info" 
+          [routerLink]="['/lista-pedido/listar/'] + pedido?.idPedido ">
+          Ver
+        </a>
+      </td>
+      
+    </tr>
+
+    </tbody>
+  </table>
+</div>  
+<div>
+  <button class="btn btn-primary" [routerLink]="['/atendimento']">Novo Pedido</button>
+  <button class="btn btn-primary" [routerLink]="['/atendimento']">Voltar</button>
+</div>
+
+<h2 class="text-center">Lista de Entregas Fechadas</h2>
+<div style="overflow-x:auto;">
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Cliente</th>
+      <th>Data </th>
+      <th>Imprimir</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pedido of pedidosFechados">
+      <td>{{ pedido?.idPedido }}</td>
+      <td>{{ pedido?.cliente.nome }}</td>
+      <td>{{ pedido?.instante }}</td>
+      <td>
+        <a class="btn btn-info" 
+          (click)="open(content, pedido?.idPedido)">
+          Ver
+        </a>
+      </td>
+      
+    </tr>
+
+    </tbody>
+  </table>
+</div>  

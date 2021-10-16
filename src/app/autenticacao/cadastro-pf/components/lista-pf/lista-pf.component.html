@@ -1,0 +1,24 @@
+ 
+<h2 class="text-center">Lista de Clientes</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Opções</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cliente of clientes">
+            <td>{{ cliente?.nome }}</td>
+            <td>{{ cliente?.telefone | phone }}</td>
+            <a routerLink="{{ '/edita-pf/' + cliente?.id }}">
+                <td><button class="btn btn-primary">Editar</button></td>
+            </a>
+            
+        </tr>
+    </tbody>
+</table>
+
+<button [routerLink]="['/cadastro-pf']" class="btn btn-primary">Cadastrar Novo Cliente</button>
+<button [routerLink]="['/atendimento']" class="btn btn-primary">Voltar</button>

@@ -1,0 +1,95 @@
+<section class="order">
+        <form [formGroup]="orderForm" novalidate>
+          <div>
+            <div>
+              <h3>
+                Revise o Pedido de Entrega
+              </h3>
+            </div>
+          </div>
+          
+          <div>
+            <div class="form-group col-sm-12">
+              <mat-list>
+                <mat-list-item>
+                  <mat-form-field>
+                    <mat-label>Cliente</mat-label>
+                    <mat-select placeholder="Cliente" formControlName="cliente">
+                      <mat-option   
+                        *ngFor="let cliente of clientes" [value]="cliente">
+                        {{ cliente?.nome }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          
+          <div>
+            <div class="col-sm-12 col-xs-12">
+              <p class="lead">Itens do Pedido:</p>
+            </div>
+            <div>
+              <app-order-items [items]="cartItems()"
+                    (increaseQty)="increaseQty($event)"
+                    (decreaseQty)="decreaseQty($event)"
+                    (remove)="remove($event)"></app-order-items>
+            </div>
+          </div>
+
+          <div class="form-group col-sm-12">
+            <h4>Forma de Pagamento</h4>
+            <div>
+              <mat-list>
+                <mat-list-item>
+                  <mat-form-field>
+                    <mat-label>Forma de Pagamento</mat-label>
+                    <mat-select placeholder="Pagamento" formControlName="formaPagamento" [(ngModel)]="fPagamento">
+                      <mat-option   
+                        *ngFor="let fp of formasPagamento" [value]="fp" >
+                        {{ fp?.formaPagamento }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-list-item>
+              </mat-list>
+            </div>
+            
+            <div class="form-group col-sm-12" *ngIf="fPagamento?.id == '1'">
+              <label>Troco para:</label> <br >
+              <input type="number" [(ngModel)]="trocoInput" formControlName="valorPago">
+            </div>
+  
+            <div *ngIf="orderForm.valid">
+              <label>Valor de Troco</label> <br >
+              <h1>{{trocoInput - itemsValue() | currency: 'BRL': 'symbol' }} </h1>
+            </div>
+            
+          </div>
+
+          <div class="btn">
+            <mat-form-field>
+              <mat-label>Observação</mat-label>
+              <textarea matInput formControlName="observacao"></textarea>
+            </mat-form-field>
+          </div>
+
+            <div class="col-sm-6 col-xs-12">
+              <p class="lead">Entrega e Total:</p>
+
+              <app-delivery-costs
+                [itemsValue]="itemsValue()"></app-delivery-costs>
+            </div>
+
+        </form>
+        <div class="row">
+          <div class="col-xs-12">
+            <button (click)="checkOrder(orderForm.value)" class="btn btn-success pull-right"
+              >
+                <i class="fa fa-credit-card"></i> Concluir Pedido
+            </button>
+          </div>
+        </div>
+
+</section>

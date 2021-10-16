@@ -1,0 +1,21 @@
+.options {
+    width: 220px;
+    margin: 0 auto;
+}
+.btnadd {
+    font-size: 40px;
+    margin: 11px;
+    width: 200px;
+}
+
+@media only screen and (max-width: 330px) {
+    .options {
+        width: 250px;
+    }
+}
+
+.btOptions {
+    margin: 10px;
+    width: 115px;
+
+}

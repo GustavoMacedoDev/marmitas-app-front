@@ -1,0 +1,86 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Adicionais</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Opção</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let adicional of adicionais">
+          <td>{{ adicional?.nome }}</td>
+          <td>{{ adicional?.preco | currency: 'BRL': 'symbol' }}</td>
+          <td><button class="btn btn-secondary" (click)="addAdicional(adicional)">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" 
+      (click)="salvar(); d('Cross click')">
+      Salvar
+    </button>
+  </div>
+</ng-template>
+
+<h3 class="text-center">
+    Voce está na Mesa: {{ mesa?.numeroMesa }}
+</h3>
+<button class="btadd btn btn-primary" [routerLink]="['/order-mesa-confirmation']">Voltar</button>
+<h4 class="text-center">Faça seu pedido:</h4>
+<div class="produtos">
+  <button *ngFor="let produto of produtos" 
+        class="btnadd btn btn-primary" (click)="addItem(produto, mesa?.id)">
+    {{ produto?.nome }}
+  </button>
+
+</div>
+
+<div class="box box-solid">
+    <div class="box-header">
+      <i class="fa fa-shopping-cart"></i>
+  
+      <h3 class="box-title">Cestinha</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+  
+      <div *ngIf="!items().length">
+        <p class="text-center">
+          Sua cestinha está vazia!
+        </p>
+      </div>
+      <div class="table-responsive" *ngIf="items().length">
+          <table class="table">
+            <tbody>
+            <tr *ngFor="let item of items()" [@row]="rowState">
+              <th>({{item.quantidade}}x) {{item.produtoItem.nome}}</th>
+              <td class="text-right">{{item.value() | currency: 'BRL': 'symbol'}}</td>
+              <td><button class="btn btn-primary" (click)="open(content)">Adicional</button></td>
+              <td class="text-right">
+                <a (click)="removeItem(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <th>Total:</th>
+              <td class="text-right">{{total() | currency: 'BRL': 'symbol'}}</td>
+            </tr>
+          </tbody></table>
+        </div>
+    </div>
+    <div class="box-footer" *ngIf="items().length">
+      <div class="pull-right">
+        <button (click)="clear()" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Limpar</button>
+        <a [routerLink]="['/order-mesa', mesa?.id]" class="btn btn-success"><i class="fa fa-credit-card"></i> Fechar Pedido</a>
+      </div>
+    </div>
+  </div>

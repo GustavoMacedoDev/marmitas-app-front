@@ -1,0 +1,23 @@
+<section class="content">
+
+    <div class="container">
+        <div class="col-xs-12">
+          <h3 class="box-title">{{restaurant?.razaoSocial}}</h3><span class="pull-right"></span>
+          </div>
+        </div>
+        
+
+        <div class="">
+          <h3 class="text-center">
+             Menu
+          </h3>
+        </div>
+
+
+  <div class="container">
+      <router-outlet></router-outlet>
+  </div>
+  
+  <button [routerLink]="['/atendimento']" class="btn btn-primary">Menu Inicial</button>
+
+  </section>

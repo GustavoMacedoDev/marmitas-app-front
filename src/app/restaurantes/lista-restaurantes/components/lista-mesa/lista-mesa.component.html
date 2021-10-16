@@ -1,0 +1,20 @@
+<h3 class="text-center">Lista de Mesas</h3>
+<div class="jumbotron jumbotron-fluid" *ngIf="!mesas?.length">
+    <p>Nenhum registro encontrado</p>
+</div>
+<div class="table" *ngIf="mesas?.length > 0">
+
+    <button *ngFor="let mesa of mesas" 
+        class="btnMesas btn btn-primary"
+        [routerLink]="['/lancamento-mesa/' + mesa.id ]">
+        {{ mesa.numeroMesa }}
+    </button>
+</div>
+<div>
+    <button class="btn btn-primary" [routerLink]="['/cadastra-mesa']">
+        Cadastrar Mesa
+    </button>
+    <button class="btn btn-primary" [routerLink]="['/atendimento']">
+        Voltar
+    </button>
+</div>
