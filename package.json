@@ -35,7 +35,7 @@
     "intl": "^1.2.5",
     "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
-    "jspdf-autotable": "^3.4.3",
+    "jspdf-autotable": "^3.5.20",
     "libphonenumber-js": "^1.7.50",
     "ng-webdatarocks": "^1.4.4",
     "pdfmake": "^0.1.65",

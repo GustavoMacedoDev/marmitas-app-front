@@ -106,9 +106,7 @@
     <h4><strong>Forma de Pagamento:</strong>  {{ pedido?.formaPagamento.formaPagamento }}</h4>
     <br *ngIf="pedido?.formaPagamento.formaPagamento == 'ASSINAR'">
     <hr *ngIf="pedido?.formaPagamento.formaPagamento == 'ASSINAR'">
-    <div>
-        <h3>MARMITESKE 66 9 9602-9237</h3>
-    </div>
+   
 </div>
 <a href="javascript: window.print(report);"><button class="btn btn-primary" (click)="imprimir()" >Imprimir</button></a>
 <button class="btadd btn btn-primary" [routerLink]="['/order-confirmation']">Voltar</button>
